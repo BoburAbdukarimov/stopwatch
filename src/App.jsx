@@ -63,18 +63,24 @@ class App extends React.Component{
 
   intervalFunc= ()=>{
     const {hours, minutes, seconds, intervalStorage, } = this.state;
-    intervalStorage.push(`${hours}: ${minutes}:${seconds}`);
+    intervalStorage.push(`${hours}:${minutes}:${seconds}`);
     this.setState({
       intervalStorage,
     })
   
   }
   clearFunc = ()=>{
-    // const {hours, minutes, seconds} = this.state
+   
     this.setState({
       hours: 0,
       minutes: 0,
       seconds: 0
+    })
+    this.setState({
+      intervalStorage: [],
+    })
+    this.setState({
+      intervalDisabled: true
     })
   }
 
