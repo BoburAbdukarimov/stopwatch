@@ -7,6 +7,7 @@ class App extends React.Component{
     seconds: 0,
   btnDisabled: false,
   intervalDisabled: true,
+  clearDisabled: true,
   interval: "", 
   intervalStorage: [],
   }
@@ -41,6 +42,9 @@ class App extends React.Component{
     this.setState({
       intervalDisabled: false
     })
+    this.setState({
+      clearDisabled: true
+     })
 
   
   }
@@ -50,23 +54,34 @@ class App extends React.Component{
     this.setState({
       btnDisabled: false
     })
+    this.setState({
+     clearDisabled: false
+    })
 
 
   }
 
   intervalFunc= ()=>{
-    const {hours, minutes, seconds, intervalStorage, intervalDisabled} = this.state;
+    const {hours, minutes, seconds, intervalStorage, } = this.state;
     intervalStorage.push(`${hours}: ${minutes}:${seconds}`);
     this.setState({
       intervalStorage,
     })
   
   }
+  clearFunc = ()=>{
+    // const {hours, minutes, seconds} = this.state
+    this.setState({
+      hours: 0,
+      minutes: 0,
+      seconds: 0
+    })
+  }
 
 
 
   render(){
-    const {hours, minutes, seconds, btnDisabled, intervalStorage, intervalDisabled} = this.state
+    const {hours, minutes, seconds, btnDisabled, intervalStorage, intervalDisabled, clearDisabled} = this.state
     return( 
       <div className="div">
          <div className="timer-container">
@@ -102,7 +117,7 @@ class App extends React.Component{
         </div>
             {/* ----//===== */}
             <div className="timer-btn">
-          <button className="btn btn-warning">clear</button>
+          <button disabled={clearDisabled} onClick={this.clearFunc} className="btn btn-warning">clear</button>
         </div>
       </div>
 
